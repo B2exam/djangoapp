@@ -14,26 +14,41 @@
 
         <h1>Listado de películas</h1>
 
-        <div>
-            <a href="/create">Añadir película</a>
+        <div class="mt-4">
+            <a class="btn btn-primary" href="/create">Añadir película</a>
         </div>
 
-        <div>
-            <ul>
+        <div class="mt-4">
+            <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Actores</th>
+                    <th>Duración</th>
+                    <th>Fecha de lanzamiento</th>
+                    <th>Género</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
                 {% for movie in movies %}
-                <li>
-                    <h3>{{ movie.title }}</h3>
-                    <p><b>Actores:</b> {{ movie.actors }}</p>
-                    <p><b>Género:</b> {{ movie.get_genre_display }}</p>
-                    <p>
-                        <a href="/{{movie.pk}}">Ver detalle</a>
-                        <a href="/{{movie.pk}}/delete">Eliminar</a>
-                    </p>
-                </li>
-                {% empty %}
-                <li>No hay películas que mostrar. <a href="/create">Añadir película</a></li>
+                <tr>
+                  <th scope="row">{{ movie.pk }}</th>
+                  <td>{{ movie.title }}</td>
+                  <td>{{ movie.actors }}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <div class="button-group">
+                        <a href="{{ movie.pk }}/update" class="btn btn-primary">Actualizar</a>
+                        <a href="{{ movie.pk }}/delete" class="btn btn-danger">Eliminar</a>
+                    </div>
+                  </td>
+                </tr>
                 {% endfor %}
-            </ul>
+            </table>
         </div>
 
     </main>

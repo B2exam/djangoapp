@@ -15,3 +15,21 @@ def index(request):
     movies = Movie.objects.all()
     
     return render(request, 'movies/index.html', {'movies': movies})
+
+def create(request):
+    """
+    Crea una película
+
+    Variables:
+        request (HttpRequest)
+    """
+
+    # Si recibimos datos por POST creamos la película 
+    # con los datos proporcionados
+    if request.POST:
+        title = request.POST['title']
+        actors = request.POST['actors']
+
+        Movie.objects.create(title=title, actors=actors)
+    
+    return render(request, 'movies/create.html')
