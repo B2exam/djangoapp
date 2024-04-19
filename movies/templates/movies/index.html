@@ -5,27 +5,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello</title>
+    <title>Listado de películas</title>
     <link rel="stylesheet" href="{% static '/vendor/bootstrap.min.css' %}">
-
 </head>
 <body>
-    <h1>Listado de películas</h1>
-    <p>
-        <form method="get">
-            <input type="text" name="search_text" id="search_text">
-            <button type="submit">Buscar</button>
-        </form>
-    </p>
 
-    <ul>
-        {% for movie in movies %}
-        <li>
-            <h3>{{ movie.title }}</h3>
-            <p><b>Actores:</b> {{ movie.actors }}</p>
-        </li>
-        {% endfor %}
-    </ul>
+    <main class="container my-4">
+
+        <h1>Listado de películas</h1>
+
+        <div>
+            <a href="/create">Añadir película</a>
+        </div>
+
+        <div>
+            <ul>
+                {% for movie in movies %}
+                <li>
+                    <h3>{{ movie.title }}</h3>
+                    <p><b>Actores:</b> {{ movie.actors }}</p>
+                    <p><b>Género:</b> {{ movie.get_genre_display }}</p>
+                    <p>
+                        <a href="/{{movie.pk}}">Ver detalle</a>
+                        <a href="/{{movie.pk}}/delete">Eliminar</a>
+                    </p>
+                </li>
+                {% empty %}
+                <li>No hay películas que mostrar. <a href="/create">Añadir película</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </main>
 
     <!-- Bootstrap JavaScript-->
     <script src="{% static '/vendor/jquery.slim.min.js' %}"></script>
