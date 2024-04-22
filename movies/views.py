@@ -31,5 +31,6 @@ def create(request):
         actors = request.POST['actors']
 
         Movie.objects.create(title=title, actors=actors)
+        return redirect('/')
     
     return render(request, 'movies/create.html')
