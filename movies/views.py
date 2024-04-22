@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.template import loader
 
 from .models import Movie
+from .forms import MovieForm
 
 def index(request):
     """
